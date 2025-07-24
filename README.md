@@ -9,5 +9,3 @@ Built with [Three.js](https://threejs.org/), [three-globe](https://github.com/va
 [MIT](LICENSE)
 
 ---
-
-*Spin the globe. Discover the world. Learn local cultures with Spint'las!*

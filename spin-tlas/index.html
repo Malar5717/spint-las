@@ -3,17 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <link rel="stylesheet" href="/spin-tlas/src/style.css">
+    <script src="https://d3js.org/d3-geo.v1.min.js"></script>
+    <title>Spin'tlas</title>
   </head>
   <body>
+
+
     <div id="app">
+
       <div id="theme-toggle">
-        <button onclick="setTheme('vintage')">v</button>
-        <button onclick="setTheme('modern')">m</button>
+        <button onclick="setTheme(document.body.classList.contains('vintage') ? 'modern' : 'vintage')"></button>
       </div>
+
       <!-- renderer.domElement creates its own canvas -->
       <div id="globe"></div>
+
+      <div id="region"></div>
+
     </div>
+
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
