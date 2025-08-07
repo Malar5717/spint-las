@@ -10,5 +10,10 @@
   },
   "devDependencies": {
     "vite": "^7.0.4"
+  },
+  "dependencies": {
+    "react-globe.gl": "^2.35.0",
+    "three": "^0.179.1",
+    "three-globe": "^2.44.0"
   }
 }

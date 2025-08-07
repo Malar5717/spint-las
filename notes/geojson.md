@@ -4,9 +4,14 @@
 
 3D rendering of globes with features - wrap images, mark shapes, label, color..
 
+*Major Switch
+
+switched from three-globe to globe.gl, an advanced wrapper class built on top of three-globe 
+it is abstract and provides the boilerplate code typically adapted for all globes
+
 ________________________________________________
 
-📁 Data Used: countries.geo.json
+📁 Data Used: world.geojson
 
 GeoJSON is a specialized format of JSON for encoding geographic data structures.
 
