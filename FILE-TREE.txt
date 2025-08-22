@@ -1,8 +1,12 @@
+├── FILE-TREE.txt
 ├── README.md
+├── news-backend
+│   ├── package-lock.json
+│   ├── package.json
+│   └── server.js
 ├── notes
 │   ├── geojson.md
-│   ├── notes.md
-│   └── render_flow.md
+│   └── notes.md
 ├── package-lock.json
 ├── package.json
 └── spin-tlas
@@ -11,10 +15,7 @@
     ├── package.json
     └── src
         ├── assets
-        │   ├── countries.geo.json
         │   ├── dark.jpg
-        │   ├── original.jpg
-        │   ├── rawr.html
         │   ├── vintage.jpg
         │   └── world.geojson
         ├── globe.js

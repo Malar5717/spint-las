@@ -17,17 +17,20 @@ export function setupGlobe(element) {
 
   // Load GeoJSON dynamically
   fetch('src/assets/world.geojson')
-    .then(res => res.json())
+    // .then(res => res.json())
+    .then(res => {
+      if(!res.ok) {
+        throw new Error(res.status);
+      }
+      return res.json();
+    })
     .then(countries => {
+
       globe
+        // build the polygons from the coords set 
         .polygonsData(countries.features)
 
-        // LABELS
-        // .labelsData(countries.features)
-        // .labelLat(d => d3.geoCentroid(d)[1])
-        // .labelLng(d => d3.geoCentroid(d)[0])
-        // .labelText(d => d.properties.name
-
+        // display name on hover 
         .onPolygonHover(hoverD => {
           const region = document.getElementById('region');
 
@@ -52,21 +55,46 @@ export function setupGlobe(element) {
         })
 
         .onPolygonClick(clickedD => {
-          console.log('Clicked:', clickedD.properties.name);
+
+          if (clickedD && clickedD.properties) {
+            const countryName = clickedD.properties.name;
+            const countryCode = clickedD.id; 
+            
+            console.log(`${countryCode} - ${countryName}`);
+            
+            if (countryCode) {
+              const fetchUrl = `http://localhost:3000/news?country=${countryCode}`;
+              console.log('Attempting to fetch:', fetchUrl);
+              
+              fetch(fetchUrl)
+                .then(response => {
+                  console.log("status",response.status);
+                  if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                  }
+                  return response.json();
+                })
+                .then(data => {
+                  console.log('fetched data:', data);
+                  // display logic goes here
+                })
+                .catch(error => {
+                  console.error(error);
+                });
+            } else {
+              console.warn('Country code not found for this region.');
+            }
+          } else {
+            console.warn('false polygon data');
+          }
         });
 
       console.log('Loaded countries:', countries.features.length);
-    });
-
-  // The animation loop is handled by globe.gl
-
-  // AutoRotate
-  // const rotationSpeed = 0.0015;
-  // function animate() {
-  //   globe.rotation(globe.rotation()[0], globe.rotation()[1] + rotationSpeed, globe.rotation()[2]);
-  //   requestAnimationFrame(animate);
-  // }
-  // animate();
+    })
+    .catch(error => {
+      console.error('Failed to load', error);
+    })
+    
   return { globe };
 }
 
